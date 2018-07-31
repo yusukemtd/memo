@@ -32,19 +32,27 @@
 
 ## 関連仕様
 
-OAuth 2.0および認可の関連技術、および関連仕様について以下に示す。
+OAuth 2.0および認可の主な関連仕様、および関連技術について以下に示す。
+
+OAuth 2.0についてより詳細を把握したい場合は、関連仕様の重要度が高い順に参照されたい。
+
+| 関連仕様 | 重要度 | 説明             |
+| :------ | :---: | :---------------- |
+| [RFC 6749]() [(日本語訳)](http://openid-foundation-japan.github.io/rfc6749.ja.html)| S+ |
+| [RFC 6750]() [(日本語訳)](http://openid-foundation-japan.github.io/rfc6750.ja.html)| S+ |
+| [RFC 6819]() [(日本語訳)](http://openid-foundation-japan.github.io/rfc6819.ja.html)| S  |
+| [RFC 7636](https://tools.ietf.org/html/rfc7636) | S | |
+| [RFC 7662](https://tools.ietf.org/html/rfc7662) | S | |
+| [RFC 7519](https://tools.ietf.org/html/rfc7519) | A | |
+| [RFC 8252](https://tools.ietf.org/html/rfc8252) | A | |
 
 | 関連技術        | 説明              |
 | :------------- | :---------------- |
 | OAuth 1.0      | [RFC 5849](https://tools.ietf.org/html/rfc5849) にて策定されているOAuth 2.0の元となったプロトコル。OAuth 2.0策定に伴い廃止となった。 |
-| OpenID Connect | OAuth 2.0をベースとした拡張されたプロトコル。OAuth 2.0では定められていなかった、End-UserのIDやプロフィール情報の連携（ID連携）方法が追加されている他、よりセキュアな実現を実現するためのパラメータ等の追加、その他関連技術がオプションとして規定されている。**TODO:後ほど概要執筆予定** |
+| OpenID Connect | OAuth 2.0をベースとした拡張されたプロトコル。OAuth 2.0では定められていなかった、End-UserのIDやプロフィール情報を連携（ID連携）する方法が追加されている他、よりセキュアな通信を実現するためのパラメータ等の追加、その他関連技術がオプションとして規定されている。**TODO:後ほど概要執筆予定** |
 | Financial API  |   |
 
-| 関連仕様 | 重要度 | 説明             |
-| :------ | :---: | :---------------- |
-| [RFC 6749]() [(日本語訳)](http://openid-foundation-japan.github.io/rfc6749.ja.html)| S++ |
-| [RFC 6750]() [(日本語訳)](http://openid-foundation-japan.github.io/rfc6750.ja.html)| S++ |
-| [RFC 6749]() [(日本語訳)]()| |
+
 
 ## ロール
 
