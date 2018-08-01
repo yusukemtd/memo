@@ -12,44 +12,44 @@
 
 ## 概要
 
-OAuth 2.0とは、HTTPサービスを利用するサードパーティアプリケーションに対して、限定的なアクセスを可能とするための「認可」フレームワークのこと。
+OAuth 2.0とは、HTTPサービスを利用するサードパーティアプリケーションに対して、限定的なアクセスを可能とするための「認可」フレームワークのこと。
 
-OAuth 2.0では、サードパーティアプリケーションに対してEnd-Userのクレデンシャル（例：ID、パスワード）を開示することなく、リソースへのアクセス権を委譲（認可）する。
+OAuth 2.0では、サードパーティアプリケーションに対してEnd-Userのクレデンシャル（例：ID、パスワード）を開示することなく、リソースへのアクセス権を委譲（認可）する。
 これにより、従来のサーバ・クライアント型の認証モデルにあった以下のような問題を解決することが可能となる。
 
-- サードパーティアプリケーションにてEnd-Userのアカウント情報を管理する必要がある
-- End-Userは、サードパーティアプリケーションに許可するアクセス可能範囲（アクセス対象のデータ、およびそれに伴う参照、更新などの操作）およびアクセス可能期間を制限することができない
+- サードパーティアプリケーションにてEnd-Userのアカウント情報を管理する必要がある
+- End-Userは、サードパーティアプリケーションに許可するアクセス可能範囲（アクセス対象のデータ、およびそれに伴う参照、更新などの操作）およびアクセス可能期間を制限することができない
 - サードパーティアプリケーションにおける情報漏えいは、End-UserのID、パスワードの漏洩につながる
 
 > **「認証」と「認可」の違いについて**
 > 
 > - 認証（`Authentication`）
->   - ユーザが本人であることを証明、確認すること。
+>   - ユーザが本人であることを証明、確認すること。
 > - 認可（`Authorization`）
->   - （認証済みの）ユーザに対して権限を委譲、承認すること。
+>   - （認証済みの）ユーザに対して権限を委譲、承認すること。
 > 
-> なお、OAuth 2.0は「認可」のフレームワークであり、認可処理の前段として必要になる、End-Userの「認証」の具体的な方法については特に定めていない。
+> なお、OAuth 2.0は「認可」のフレームワークであり、認可処理の前段として必要になる、End-Userの「認証」の具体的な方法については特に定めていない。
 
 ## 関連仕様
 
 OAuth 2.0および認可の主な関連仕様、および関連技術について以下に示す。
 
-OAuth 2.0についてより詳細を把握したい場合は、関連仕様の重要度が高い順に参照されたい。
+OAuth 2.0についてより詳細を把握したい場合は、関連仕様の重要度が高い順に参照されたい。
 
 | 関連仕様 | 重要度 | 説明             |
 | :------ | :---: | :---------------- |
-| [RFC 6749]() [(日本語訳)](http://openid-foundation-japan.github.io/rfc6749.ja.html)| S+ |
-| [RFC 6750]() [(日本語訳)](http://openid-foundation-japan.github.io/rfc6750.ja.html)| S+ |
-| [RFC 6819]() [(日本語訳)](http://openid-foundation-japan.github.io/rfc6819.ja.html)| S  |
-| [RFC 7636](https://tools.ietf.org/html/rfc7636) | S | |
-| [RFC 7662](https://tools.ietf.org/html/rfc7662) | S | |
-| [RFC 7519](https://tools.ietf.org/html/rfc7519) | A | |
-| [RFC 8252](https://tools.ietf.org/html/rfc8252) | A | |
+| [RFC 6749 The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749)]() [(日本語訳)](http://openid-foundation-japan.github.io/rfc6749.ja.html)| S+ |
+| [RFC 6750 The OAuth 2.0 Authorization Framework: Bearer Token Usage](https://tools.ietf.org/html/rfc6750) [(日本語訳)](http://openid-foundation-japan.github.io/rfc6750.ja.html)| S+ |
+| [RFC 6819 OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819) [(日本語訳)](http://openid-foundation-japan.github.io/rfc6819.ja.html)| S  |
+| [RFC 7636 Proof Key for Code Exchange by OAuth Public Clients](https://tools.ietf.org/html/rfc7636) | S | |
+| [RFC 7662 OAuth 2.0 Token Introspection](https://tools.ietf.org/html/rfc7662) | S | |
+| [RFC 7519 JSON Web Token (JWT)](https://tools.ietf.org/html/rfc7519) | A | |
+| [RFC 8252 OAuth 2.0 for Native Apps](https://tools.ietf.org/html/rfc8252) | A | |
 
 | 関連技術        | 説明              |
 | :------------- | :---------------- |
-| OAuth 1.0      | [RFC 5849](https://tools.ietf.org/html/rfc5849) にて策定されているOAuth 2.0の元となったプロトコル。OAuth 2.0策定に伴い廃止となった。 |
-| OpenID Connect | OAuth 2.0をベースとした拡張されたプロトコル。OAuth 2.0では定められていなかった、End-UserのIDやプロフィール情報を連携（ID連携）する方法が追加されている他、よりセキュアな通信を実現するためのパラメータ等の追加、その他関連技術がオプションとして規定されている。**TODO:後ほど概要執筆予定** |
+| OAuth 1.0      | [RFC 5849](https://tools.ietf.org/html/rfc5849) にて策定されているOAuth 2.0の元となったプロトコル。OAuth 2.0策定に伴い廃止となった。 |
+| OpenID Connect | OAuth 2.0をベースとした拡張されたプロトコル。OAuth 2.0では定められていなかった、End-UserのIDやプロフィール情報を連携（ID連携）する方法が追加されている他、よりセキュアな通信を実現するためのパラメータ等の追加、その他関連技術がオプションとして規定されている。**TODO:後ほど概要執筆予定** |
 | Financial API  |   |
 
 
@@ -64,7 +64,7 @@ OAuth 2.0についてより詳細を把握したい場合は、関連仕様の�
 
 ### 認可コードフロー
 
-
+
 
 
 
