@@ -17,11 +17,11 @@ OAuth 2.0とは、HTTPサービスを利用するサードパーティアプリ�
 OAuth 2.0では、サードパーティアプリケーションに対してEnd-Userのクレデンシャル（例：ID、パスワード）を開示することなく、リソースへのアクセス権を委譲（認可）する。
 OAuth 2.0フローの中で、End-Userにより認可され、発行された情報はアクセストークンと呼ぶ。サードパーティアプリケーションはこのアクセストークンを用いることで、End-Userのリソースへ（許可された範囲での）アクセスが可能となる。
 
-これにより、従来のサーバ・クライアント型の認証モデルにあった以下のような問題を解決することが可能となる。
+これにより、従来のサーバ・クライアント型の認証モデルにあった以下のような問題を解決する。
 
-- サードパーティアプリケーションにてEnd-Userのアカウント情報を管理する必要がある
-- End-Userは、サードパーティアプリケーションに許可するアクセス可能範囲（アクセス対象のデータ、およびそれに伴う参照、更新などの操作）およびアクセス可能期間を制限することができない
-- サードパーティアプリケーションにおける情報漏えいは、End-UserのID、パスワードの漏洩につながる
+- サードパーティアプリケーションにてEnd-Userのアカウント情報を管理する必要がある。
+- End-Userは、サードパーティアプリケーションに許可するアクセス可能範囲（アクセス対象のデータ、およびそれに伴う参照、更新などの操作）およびアクセス可能期間を制限することができない。
+- サードパーティアプリケーションにおける情報漏えいは、End-UserのID、パスワードの漏洩につながる。
 
 > **「認証」と「認可」の違いについて**
 > 
@@ -38,21 +38,21 @@ OAuth 2.0フローの中で、End-Userにより認可され、発行された情
 OAuth 2.0は様々な関連仕様により構成されており、これらを組み合わせることで認可を実現する。
 OAuth 2.0の主な関連仕様を以下に示す。
 
-OAuth 2.0についてより詳細を把握したい場合は、関連仕様の重要度が高い順に参照されたい。
+なお、OAuth 2.0についてより詳細を把握したい場合は、下記関連仕様の重要度が高い順に参照することを推奨する。
 
 **OAuth 2.0関連仕様**
 
 | 関連仕様 | 重要度 | 説明             |
 | :------ | :---: | :---------------- |
-| [RFC 6749 The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749) [(日本語訳)](http://openid-foundation-japan.github.io/rfc6749.ja.html)| 高 | OAuth 2.0のコアとなるプロトコル。アクセストークン発行までのフローを規定。
-| [RFC 6750 The OAuth 2.0 Authorization Framework: Bearer Token Usage](https://tools.ietf.org/html/rfc6750) [(日本語訳)](http://openid-foundation-japan.github.io/rfc6750.ja.html)| 高 | アクセストークンを用いてリソースへのアクセスを行う際のフローを規定。
+| [RFC 6749 The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749) [(日本語訳)](http://openid-foundation-japan.github.io/rfc6749.ja.html)| 高 | OAuth 2.0のコアとなるプロトコル。アクセストークン発行までのフローを規定。
+| [RFC 6750 The OAuth 2.0 Authorization Framework: Bearer Token Usage](https://tools.ietf.org/html/rfc6750) [(日本語訳)](http://openid-foundation-japan.github.io/rfc6750.ja.html)| 高 | アクセストークンを用いてリソースへのアクセスを行う際のフローを規定。
 | [RFC 6819 OAuth 2.0 Threat Model and Security Considerations](https://tools.ietf.org/html/rfc6819) [(日本語訳)](http://openid-foundation-japan.github.io/rfc6819.ja.html)| 高 | OAuth 2.0の利用に際して注意すべきセキュリティ上の特徴・注意点。
 | [RFC 7636 Proof Key for Code Exchange by OAuth Public Clients](https://tools.ietf.org/html/rfc7636) | 中 | PKCE（ぴくしー）と呼ぶ。後述する、認可コードの横取り攻撃への対策を規定。
 | [RFC 7662 OAuth 2.0 Token Introspection](https://tools.ietf.org/html/rfc7662) | 中 | 後述する、リソースサーバがアクセストークンの妥当性を検証するために、認可サーバへ問い合わせる際のフローを規定。
 | [RFC 7519 JSON Web Token (JWT)](https://tools.ietf.org/html/rfc7519) | 低 | JWT（じょっと）と呼ぶ。JSONオブジェクトを署名または暗号化しURL-safeな文字列とするための仕様を規定。OAuth 2.0ではアクセストークンをJWTとして発行することもある。また、後述するOpenID Connectでは様々な箇所でJWTを利用している。**TODO:OpenID Connectと合わせて概要執筆予定**
 | [RFC 8252 OAuth 2.0 for Native Apps](https://tools.ietf.org/html/rfc8252) | 低 | OAuth 2.0をiOS、Androidなどのネイティブアプリケーションで利用する際の、現時点でのベストプラクティスを規定。本仕様で紹介しているフローではPKCEを適用している。
 
-参考情報として、Auth 2.0以外で認可を実現する際の関連技術について以下に示す。
+また参考情報として、Auth 2.0以外で認可を実現する際の関連技術について以下に示す。
 
 **OAuth 2.0以外の認可を実現する関連技術**
 
@@ -65,7 +65,7 @@ OAuth 2.0についてより詳細を把握したい場合は、関連仕様の�
 > **Financial-grade API（FAPI）について**
 > 
 > FAPIは金融APIの仕様であるが、他分野であってもセキュリティへの考慮事項は参考になるため、参照することを推奨する。
-> なお、FAPIが定める、参照系API（例：残高照会）および更新系API（例：口座振込）の要件を定めている [Part1](http://openid.net/specs/openid-financial-api-part-1.html)、[Part2](http://openid.net/specs/openid-financial-api-part-2.html) は 2018/8/1現在、Implementer's Draftであるため、今後策定が進むに伴い変更が入る可能性がある。
+> なお、FAPIが定める、参照系API（例：残高照会）および更新系API（例：口座振込）の要件を定めている [Part1](http://openid.net/specs/openid-financial-api-part-1.html)、[Part2](http://openid.net/specs/openid-financial-api-part-2.html) は 2018/8/1現在、Implementer's Draftであるため、今後策定が進むに伴い変更が入る可能性がある。
 > また、Part2で紹介されている [OAuth 2.0 Token Binding [OAUTB]](https://tools.ietf.org/html/draft-ietf-oauth-token-binding-04) はTLSレイヤを改修する必要があり、実現可能となるまで暫く時間がかかると予想される。
 
 ## ロール
@@ -89,7 +89,7 @@ OAuth 2.0では、以下の4つのロールを定義している。
 > **パブリッククライアントの認証について**
 > 
 > OAuth 2.0におけるフローでは、クライアントがパブリッククライアントである場合、認証をクライアントを識別する目的で利用してはならず、また認証したパブリッククライアントを **信頼してはならない** とされている。
-> そのため、後述するOAuth 2.0のフローの一種であるインプリシットグラントフローでは、クライアントの認証を行っておらず、セキュリティリスクの高い（ユーザビリティとのトレードオフにより割り切った）フローとなっている。
+> そのため、後述するインプリシットグラントフローはパブリッククライアントに最適化されたOAuth 2.0フローであるが、クライアントの認証を行っておらず、セキュリティリスクの高い（ユーザビリティとのトレードオフにより割り切った）フローとなっている。
 
 ## フロー
 
