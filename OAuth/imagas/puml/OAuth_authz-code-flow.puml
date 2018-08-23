@@ -1,86 +1,87 @@
 @startuml authz-code-flow
 
-actor User
+actor "Resource Owner" as user
+participant "User-Agent" as ua
+participant "Client" as client
+participant "Authoriztion Server" as authz
+participant "Resource Server" as resource
 
-== Initial ==
+user -> client : Resource Request
+activate client
 
-User -> Client : Request Client Sign In
-note right : GET /user/sign_in
+client -> client : Access Token?
 
-activate Client
-Client -> Client : Access Token?
+alt invalid access token
+  |||
+  ua <-- client : Redirect to Authorization Endpoint
+  deactivate client
 
-== Authentication ==
+  ua -> authz : Authorization Request
+  note right : GET /authorize
+  activate authz
 
-Client -> AuthN : Redirect
-note right : GET /oauth/authorize
-deactivate Client
+  authz -> authz : User Authenticated ?
 
-activate AuthN
-AuthN -> AuthN : Current User?
-AuthN -> AuthN : Redirect
-note right : GET /user/sign_in
-User <- AuthN : Response AuthN Sign In
-deactivate AuthN
+  alt unauthenticated
+    |||
+    ua <-- authz : Login Page
+    deactivate authz
+    activate ua
 
-User -> AuthN : Request AuthN Sign In (ID, Pass)
+    user -> ua
+    ua -> authz : Sign In
+    deactivate ua
+    activate authz
 
-activate AuthN
-note right : POST /user/sign_in
-AuthN -> AuthN : Redirect
-note right : GET /oauth/authorize
+    authz -> authz : User Authentication
+    |||
+  end
+  |||
+  ua <-- authz : Approval Page
+  deactivate authz
+  activate ua
 
-== Authorization ==
+  user -> ua
+  ua -> authz : Approved (or Denied)
+  deactivate ua
+  activate authz
 
-AuthN -> AuthZ : Redirect
-note right : GET /oauth/authorize
-deactivate AuthN
+  authz -> authz : Generate Authorization Code
 
-activate AuthZ
-User <- AuthZ : Response AuthZ Application
-deactivate AuthZ
+  ua <-- authz : Redirect to Requested Redirect URI
+  deactivate authz
 
-User -> AuthZ : Request AuthZ Application (Allow)
-note right : POST /oauth/authorize
+  ua -> client : Authorization Response
+  activate client
 
-activate AuthZ
-AuthZ -> AuthZ : Generate Code
+  client -> authz : Access Token Request
+  note right : POST /token
+  activate authz
 
-Client <- AuthZ : Redirect
-note right : GET /callback
-deactivate AuthZ
+  authz -> authz : Genereate Access Token (and Refresh Token)
 
-activate Client
-Client -> AuthZ : Request Access Token
-note right : POST /oauth/access_token
+  client <-- authz : Access Token Response
+  deactivate authz
+  |||
+end
+|||
+client -> resource : Protected Resource Request
+activate resource
 
-activate AuthZ
-AuthZ -> AuthZ : Authorization Code?
-AuthZ -> AuthZ : Generate Token
+alt use introspectio endpoint
+  |||
+  authz <- resource : Introspection Request
+  note left : POST /introspect
+  activate authz
 
-Client <-- AuthZ : Response Access Token
-deactivate AuthZ
+  authz --> resource : Introspection Response
+  deactivate authz
+  |||
+end
+|||
+client <-- resource : Protected Resource Response
+deactivate resource
 
-Client -> Client : Redirect
-note right : GET /user/sign_in
-
-Client -> Client : Access Token?
-
-== Resource ==
-
-Client -> Resource : Request User (Access Token)
-note right : GET /api/user
-
-activate Resource
-Client <-- Resource : Response User
-deactivate Resource
-
-== Final ==
-
-Client -> Client : Redirect
-note right : GET /
-
-User <- Client : Response Client Sign In
-deactivate Client
-
+user <-- client : Resource Response
+|||
 @enduml authz-code-flow
