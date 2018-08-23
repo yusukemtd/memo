@@ -152,9 +152,11 @@ OAuth 2.0では、4つのグラントタイプを定義している。
 > 
 > なお、[RFC 6749 The OAuth 2.0 Authorization Framework](https://tools.ietf.org/html/rfc6749) ではネイティブアプリケーションは認可コードフロー、インプリシットフローのどちらでもよいこととなっているが、後続のRFCである [RFC 8252 OAuth 2.0 for Native Apps](https://tools.ietf.org/html/rfc8252) では認可コードフローを前提としている。また、FAPIではネイティブアプリケーションは OAuth 2.0 for Native Apps の対応が必須となっているため、これから検討するのであれば、ネイティブアプリケーションであっても認可コードフローの利用を推奨する。
 
-**TODO：後日更新予定**
-
 ### 認可コードフロー詳細
+
+以下に認可コードフローを示す。
+
+![image](./images/authz-code-flow.png)
 
 **TODO：後日更新予定**
 
